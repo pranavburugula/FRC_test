@@ -1,5 +1,7 @@
 package org.usfirst.frc.team201800130.robot;
 
+import org.usfirst.frc.team201800130.robot.drivesystem.DriveSystem;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,6 +18,8 @@ public class Robot extends IterativeRobot {
 	final String customAuto = "My Auto";
 	String autoSelected;
 	SendableChooser<String> chooser = new SendableChooser<>();
+	DriverStation driverStation=null;
+	DriveSystem driveSys=null;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -23,9 +27,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		chooser.addDefault("Default Auto", defaultAuto);
-		chooser.addObject("My Auto", customAuto);
-		SmartDashboard.putData("Auto choices", chooser);
+//		chooser.addDefault("Default Auto", defaultAuto);
+//		chooser.addObject("My Auto", customAuto);
+//		SmartDashboard.putData("Auto choices", chooser);
+		driveSys = new DriveSystem(0, 1);
+		driverStation = new DriverStation(1, driveSys);
 	}
 
 	/**
@@ -68,6 +74,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		driverStation.runTeleOp();
 	}
 
 	/**
